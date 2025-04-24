@@ -1,2 +1,1 @@
-1. Tõmban alla postgresql (pass: homework)
-2. 
+readme to incorporate later
