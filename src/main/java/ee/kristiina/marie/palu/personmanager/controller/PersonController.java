@@ -5,6 +5,7 @@ import ee.kristiina.marie.palu.personmanager.person.Person;
 import ee.kristiina.marie.palu.personmanager.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public class PersonController {
     // such as GET, POST, PUT, DELETE by automatically serializing responses to JSON.
     @Autowired
     private PersonRepository personRepository;
+    private JdbcTemplate jdbcTemplate;
+
 
 
     /**
@@ -37,7 +40,7 @@ public class PersonController {
      * @return person by id
      */
     @GetMapping("/{id}")
-    public Person getPersonById(@PathVariable long id) {
+    public Person getPersonById(@PathVariable Integer id) {
         return personRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Person not found"));
     }
@@ -53,6 +56,8 @@ public class PersonController {
         return personRepository.save(person);
     }
 
+
+
     /**
      *
      * @param id update person
@@ -60,24 +65,36 @@ public class PersonController {
      * @return person
      */
     @PutMapping("/{id}")
-    public Person updatePerson(@PathVariable long id, @RequestBody Person personDetails) {
+    public Person updatePerson(@PathVariable Integer id, @RequestBody Person personDetails) {
         Person person = personRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Company not found"));
+                .orElseThrow(() -> new RuntimeException("Person not found"));
         person.setName(personDetails.getName());
-        person.setBirthDate(personDetails.getBirthDate());
         person.setEmail(personDetails.getEmail());
-        person.setGender(personDetails.getGender());
-        person.setId(personDetails.getId());
         person.setPhone(personDetails.getPhone());
+        person.setGender(personDetails.getGender());
+        person.setBirthDate(personDetails.getBirthDate());
         return personRepository.save(person);
     }
+
 
     /**
      *
      * @param id delete person
      */
     @DeleteMapping("/{id}")
-    public void deletePerson(@PathVariable long id) {
+    public void deletePerson(@PathVariable Integer id) {
         personRepository.deleteById(id);
+
+        // Reset the AUTO_INCREMENT after delete
+        resetAutoIncrement();
     }
+
+    private void resetAutoIncrement() {
+        // Assuming you're using MySQL
+        String resetAutoIncrementQuery = "ALTER TABLE person AUTO_INCREMENT = 1"; // Reset to 1
+        jdbcTemplate.execute(resetAutoIncrementQuery); // Execute the query using JdbcTemplate
+    }
+
+
+
 }

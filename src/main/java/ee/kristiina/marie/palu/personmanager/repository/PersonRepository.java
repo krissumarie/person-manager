@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonRepository extends JpaRepository<Person, Integer> {
     // @Repository that extends the CrudRepository.--- (CRUD (Create, Read, Update, Delete))
     // The @Repository annotation marks this interface as a Spring Data repository.
     @Query("SELECT p FROM Person p WHERE p.name LIKE %:name% ORDER BY p.name")
