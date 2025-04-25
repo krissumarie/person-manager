@@ -21,12 +21,12 @@ public class PersonController {
     // such as GET, POST, PUT, DELETE by automatically serializing responses to JSON.
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
 
 
     /**
-     *
      * @return people
      */
     @GetMapping
@@ -35,7 +35,6 @@ public class PersonController {
     }
 
     /**
-     *
      * @param id id
      * @return person by id
      */
@@ -46,7 +45,6 @@ public class PersonController {
     }
 
     /**
-     *
      * @param person create
      * @return person
      */
@@ -57,10 +55,8 @@ public class PersonController {
     }
 
 
-
     /**
-     *
-     * @param id update person
+     * @param id            update person
      * @param personDetails update
      * @return person
      */
@@ -78,23 +74,10 @@ public class PersonController {
 
 
     /**
-     *
      * @param id delete person
      */
     @DeleteMapping("/{id}")
     public void deletePerson(@PathVariable Integer id) {
         personRepository.deleteById(id);
-
-        // Reset the AUTO_INCREMENT after delete
-        resetAutoIncrement();
     }
-
-    private void resetAutoIncrement() {
-        // Assuming you're using MySQL
-        String resetAutoIncrementQuery = "ALTER TABLE person AUTO_INCREMENT = 1"; // Reset to 1
-        jdbcTemplate.execute(resetAutoIncrementQuery); // Execute the query using JdbcTemplate
-    }
-
-
-
 }

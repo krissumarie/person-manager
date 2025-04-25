@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 function PersonManager() {
-    const [personId, setPersonId] = useState('');
-    const [person, setPerson] = useState(null);
+    const [personId, setPersonId] = useState(''); // ID storage
+    const [person, setPerson] = useState(null); // person storage
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [gender, setGender] = useState('');
     const [birthDate, setBirthDate] = useState('');
-    const [error, setError] = useState('');
-    const [action, setAction] = useState('');
+    const [error, setError] = useState(''); // Stores error messages
+    const [action, setAction] = useState(''); // Tracks current action
 
     useEffect(() => {
-        if (action === 'update' || action === 'remove') {
+        if (action === 'update' || action === 'remove') { // If action changes
             if (personId) {
-                fetch(`http://localhost:8080/persons/${personId}`)
+                fetch(`http://localhost:8080/persons/${personId}`) // fetches new person with ID
                     .then((response) => {
                         if (!response.ok) {
                             throw new Error('Person not found');
@@ -30,13 +30,14 @@ function PersonManager() {
                         setBirthDate(data.birthDate);
                         setError('');
                     })
-                    .catch((err) => {
+                    .catch((err) => { // If error then it sends error message
                         setError(err.message);
                     });
             }
         }
     }, [personId, action]);
 
+    // Adds new person
     const handleAddPerson = (event) => {
         event.preventDefault();
         const newPerson = { name, email, phone, gender, birthDate };
@@ -58,6 +59,7 @@ function PersonManager() {
             });
     };
 
+    // Updates the person
     const handleUpdatePerson = (event) => {
         event.preventDefault();
         const updatedPerson = { name, email, phone, gender, birthDate };
@@ -84,6 +86,7 @@ function PersonManager() {
             });
     };
 
+    // removes person
     const handleRemovePerson = () => {
         fetch(`http://localhost:8080/persons/${personId}`, { method: 'DELETE' })
             .then(() => {
@@ -96,6 +99,7 @@ function PersonManager() {
             });
     };
 
+    // Returns this, compared to different action states
     return (
         <div className="person-manager-container">
             <h1>Manage Person</h1>

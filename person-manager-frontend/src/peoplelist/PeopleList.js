@@ -1,51 +1,67 @@
 import React, { useState, useEffect } from 'react';
+import '../index.css';  // The css file I use
 
 function PeopleList() {
-    const [people, setPeople] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [people, setPeople] = useState([]); // List of people (react method)
+    const [searchTerm, setSearchTerm] = useState(''); // what user searches for
+    const [sortOrder, setSortOrder] = useState('asc'); // Sorting state, 'asc' for ascending, 'desc' for descending
 
     useEffect(() => {
-        fetch('http://localhost:8080/persons')
+        fetch('http://localhost:8080/persons') // Fetches ppl from server
             .then(response => response.json())
             .then(data => setPeople(data))
             .catch(error => console.log("Error fetching data:", error));
     }, []);
 
-    // Filter people based on the search term
+    // Filter people based on the search
     const filteredPeople = people.filter(person =>
         person.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // Sort people alphabetically based on name
+    const sortedPeople = filteredPeople.sort((a, b) => {
+        if (sortOrder === 'asc') {
+            return a.name.localeCompare(b.name);
+        } else {
+            return b.name.localeCompare(a.name);
+        }
+    });
+
+    // Changes from asc to desc
+    const handleSortChange = (event) => {
+        setSortOrder(event.target.value);
+    };
+
     return (
         <div>
             <h1>List of People</h1>
+            <div className="filters-container">
+                <div className="search-container">
+                    <input
+                        type="text"
+                        placeholder="Search by name..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
 
-            <section className="People-text">
-                <p>Here is a list of all people in the database</p>
-            </section>
-
-            <div className="search-container" style={{ marginBottom: "20px" }}>
-                <input
-                    type="text"
-                    placeholder="Search by name..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{
-                        padding: "10px",
-                        width: "100%",
-                        maxWidth: "400px",
-                        margin: "0 auto",
-                        borderRadius: "5px",
-                        border: "1px solid #ccc",
-                        fontSize: "16px"
-                    }}
-                />
+                <div className="sort-container">
+                    <label htmlFor="sort">Sort alphabetically:</label>
+                    <select
+                        id="sort"
+                        value={sortOrder}
+                        onChange={handleSortChange}
+                    >
+                        <option value="asc">A-Z</option>
+                        <option value="desc">Z-A</option>
+                    </select>
+                </div>
             </div>
 
             <ul>
-                {filteredPeople.length > 0 ? (
-                    filteredPeople.map(person => (
-                        <li key={person.id} style={{ marginBottom: "20px" }}>
+                {sortedPeople.length > 0 ? (
+                    sortedPeople.map(person => (
+                        <li key={person.id}>
                             <strong>ID:</strong> {person.id} <br />
                             <strong>Name:</strong> {person.name} <br />
                             <strong>Birthdate:</strong> {new Date(person.birthDate).toLocaleDateString()} <br />
