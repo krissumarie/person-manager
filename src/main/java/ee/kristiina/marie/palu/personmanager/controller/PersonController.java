@@ -50,8 +50,6 @@ public class PersonController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Person createPerson(@RequestBody Person person) {
-        System.out.println(">>> Incoming person: " + person); // Debug print
-
         return personRepository.save(person);
     }
 
