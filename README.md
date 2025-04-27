@@ -56,7 +56,7 @@ Follow these steps to set up and run the webpage:
 
 ## Project structure
 
-My project is composed of 
+My project is composed of a backend part, frontend part, database and docker.
  1. **Backend**: Java Spring Boot (Inside the src file):
       - **WebConfig** - Allows my backend to talk to my frontend, without blockage from CORS(Cross-Origin Resource Sharing)
       - **PersonController** - This allows my frontend to get access to adding, removing and getting people.
@@ -65,17 +65,17 @@ My project is composed of
          allowing me to interact with the person in the database.
 
  2. **Frontend**: React.js with CSS styling
-       - **App.js** - This is my first welcoming homepage, with a navbar.
+       - **App.js** - This is my first welcoming homepage, with the navbar code.
        - **PeopleList.js** - This is a page, where you can look at all the people in the database, search them by name
           and sort them alphabetically.
        - **ManagePeople.js** - This is a page, where you can remove and update people by ID and add people.
        - **Index.css** - A file with all of my styling information for the webpage
  3. **Database** - PostgreSQL
-      - My database saves the person entity and allows me to update the list and save all the information into 
+      - My database saves the person entity and allows me to update the people in the list and save all the information into 
         the database
  4. **Docker containers**
       - I have 3 different Docker files. I have a frontend Dockerfile in my person-manager-frontend directory,
-         I have one in the root for my backend and a final one, which generates 3 doker containers automatically for
+         I have one in the root for my backend and a final one, which generates 3 docker containers automatically for
          frontend, backend and database.
 
 ### Thank you for giving me a chance to show my skills! 
