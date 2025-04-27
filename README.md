@@ -53,7 +53,8 @@ Follow these steps to set up and run the webpage:
 
 10. **Open http://localhost:3000/**
 
-
+## This is how the first page should look like, after initially opening it
+![img.png](img.png)
 ## Project structure
 
 My project is composed of a backend part, frontend part, database and docker.
