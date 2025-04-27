@@ -14,7 +14,7 @@ thank you for taking the time to review my assignment.
 Follow these steps to set up and run the webpage:
 
 1. **Clone my GitHub project into an IDE**
-   - Open the blue code button and copy the link from HTTP.
+   - Open the green code button and copy the link from HTTP.
    - Open an IDE app (I used Intellij), and add new project from version control.
 
 2. **Java Version**
