@@ -1,6 +1,6 @@
 {
   "short_name": "Webpage",
-  "name": "Create React App Sample",
+  "name": "Person manager webpage",
   "icons": [
     {
       "src": "favicon.ico",

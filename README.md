@@ -14,8 +14,8 @@ thank you for taking the time to review my assignment.
 Follow these steps to set up and run the webpage:
 
 1. **Clone my GitHub project into an IDE**
-   - Open the green code button and copy the link from HTTP.
-   - Open an IDE app (I used Intellij), and add new project from version control.
+   - Open the green code button and copy the link from HTTPS.
+   - Open an IDE app (I used Intellij), and add new project from version control and paste the link into the URL.
 
 2. **Java Version**
     - Make sure you have Java 17 installed and in the project.
@@ -43,8 +43,8 @@ Follow these steps to set up and run the webpage:
    ```bash
    docker --version
 
-8. **Build the docker containers**
-   Open the terminal and run:
+8. **Build the docker containers**  
+    Open the terminal and run:
 
    ```bash
    docker docker compose up --build 
