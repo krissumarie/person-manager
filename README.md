@@ -47,7 +47,7 @@ Follow these steps to set up and run the webpage:
     Open the terminal and run:
 
    ```bash
-   docker docker compose up --build 
+   docker compose up --build 
 
 9. **Ensure, that the docker containers are visible and active in Docker desktop**
 
